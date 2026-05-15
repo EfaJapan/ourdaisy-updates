@@ -277,7 +277,7 @@
   }
   .tl-items li::before { position: absolute; left: 0; color: var(--border); }
   .li-new::before     { content: '+'; color: #16A34A; font-weight: 700; }
-  .li-fix::before     { content: '✕'; color: #D97706; font-size: 10px; top: 4px; }
+  .li-fix::before     { content: '\00D7'; color: #D97706; font-size: 10px; top: 4px; }
   .li-improve::before { content: '↑'; color: var(--efa-blue); font-weight: 700; }
 
   .tl-foot {
@@ -320,12 +320,12 @@
 
 <!-- ===== CONFIGURATION — edit this section ===== -->
 <script>
-const SITE_CONFIG = https://script.google.com/macros/s/AKfycbytpG_LtTkHYHBJrTPrlKfuhILzw0em3Ue7n0k2cN3uNWTyEs0tjWPy5O17_mN3C-rV/exec
+const SITE_CONFIG = {
   // GAS Web App URL — replace after deploying GAS
-  GAS_URL: "https://script.google.com/macros/s/AKfycbytpG_LtTkHYHBJrTPrlKfuhILzw0em3Ue7n0k2cN3uNWTyEs0tjWPy5O17_mN3C-rV/exec",
+  GAS_URL: "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec",
 
   // Google Drive "ourdaisy-releases" folder URL (for admin panel)
-  DRIVE_FOLDER_URL: "https://drive.google.com/drive/folders/12vIl7AEHDRmKoQhw1MVMWLxvvB1sILlG?usp=drive_link",
+  DRIVE_FOLDER_URL: "https://drive.google.com/drive/folders/YOUR_FOLDER_ID",
 
   // Admin Google accounts (shown admin panel)
   ADMIN_EMAILS: ["info@efa-japan.org"],
