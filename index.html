@@ -5,132 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OurDaisy — Downloads | EFA Japan</title>
 <style>
-/* ── Reset & Base ── */
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Arial,'Noto Sans Lao','Noto Sans Khmer',sans-serif;
-     background:#F0F4F8;color:#1A2A3A;min-height:100vh;}
+body{
+  font-family:'Segoe UI',Arial,'Noto Sans Lao','Noto Sans Khmer',sans-serif;
+  background:linear-gradient(160deg,#EEF5FF 0%,#F5F8FC 60%,#E8F7EF 100%);
+  color:#1A2A3A;min-height:100vh;
+}
 
 /* ── Header ── */
 .site-header{
   background:linear-gradient(135deg,#005EAD 0%,#003A70 100%);
-  padding:18px 24px;display:flex;align-items:center;gap:14px;
-  box-shadow:0 2px 12px rgba(0,94,173,0.25);
+  padding:16px 24px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 3px 16px rgba(0,94,173,0.30);
 }
-.site-header .logo{font-size:1.5rem;}
-.site-header h1{color:#fff;font-size:1.1rem;font-weight:700;}
-.site-header .sub{color:rgba(255,255,255,0.65);font-size:0.78rem;margin-left:auto;}
+.site-header .logo{font-size:1.6rem;}
+.site-header h1{color:#fff;font-size:1.15rem;font-weight:700;line-height:1.2;}
+.site-header .tagline{color:rgba(255,255,255,0.70);font-size:0.78rem;margin-top:2px;}
+.site-header .efamark{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.72rem;padding:4px 12px;border-radius:20px;}
 
-/* ── Layout ── */
-.container{max-width:700px;margin:0 auto;padding:28px 20px 60px;}
+/* ── Container ── */
+.container{max-width:720px;margin:0 auto;padding:28px 20px 60px;}
 
-/* ── Section titles ── */
+/* ── Section label ── */
 .section-label{
+  display:inline-flex;align-items:center;gap:8px;
   font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;
-  padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;
+  padding:5px 14px;border-radius:20px;margin-bottom:14px;
 }
-.label-app{background:#E8F1FB;color:#005EAD;}
+.label-app     {background:#E8F1FB;color:#005EAD;}
 .label-bilingual{background:#FFF0D4;color:#7A4200;}
 
 /* ── Card ── */
 .card{
-  background:#fff;border-radius:14px;padding:24px;
-  box-shadow:0 4px 20px rgba(0,94,173,0.09);margin-bottom:16px;
+  background:#fff;border-radius:16px;
+  box-shadow:0 4px 24px rgba(0,94,173,0.10);
+  margin-bottom:20px;overflow:hidden;
 }
-.card-app{border-top:4px solid #005EAD;}
-.card-bilingual{border-top:4px solid #E67E22;}
+.card-app      {border-top:5px solid #005EAD;}
+.card-bilingual{border-top:5px solid #E67E22;}
 
-/* ── App version block ── */
-.version-block{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;margin-bottom:20px;
+.card-header{
+  padding:18px 22px 14px;
+  border-bottom:1px solid #F0F4F8;
+  display:flex;align-items:center;gap:12px;
 }
-.version-info h2{font-size:1.1rem;font-weight:700;color:#003A70;}
-.version-info .ver-tag{
-  display:inline-block;background:#005EAD;color:#fff;
-  font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:20px;
-  margin-top:4px;
+.card-header .icon{font-size:1.6rem;}
+.card-header h2{font-size:1.05rem;font-weight:700;color:#003A70;}
+.card-header .badge-ver{
+  margin-left:auto;background:#005EAD;color:#fff;
+  font-size:0.75rem;font-weight:700;padding:3px 12px;border-radius:20px;
+  white-space:nowrap;
 }
-.version-info .ver-date{font-size:0.78rem;color:#6B7280;margin-top:3px;}
+.card-body{padding:20px 22px;}
 
-/* ── Download Buttons ── */
+/* ── App DL button ── */
+.app-dl-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+.app-dl-date{font-size:0.78rem;color:#6B7280;}
+
+/* ── Download buttons ── */
 .dl-btn{
   display:inline-flex;align-items:center;gap:8px;
-  padding:11px 20px;border-radius:9px;font-family:inherit;
-  font-size:0.88rem;font-weight:700;cursor:pointer;text-decoration:none;
-  transition:all 0.2s;border:none;
+  padding:11px 22px;border-radius:10px;font-family:inherit;
+  font-size:0.88rem;font-weight:700;cursor:pointer;
+  text-decoration:none;transition:all 0.2s;border:none;
 }
-.dl-btn-primary{background:#005EAD;color:#fff;}
-.dl-btn-primary:hover{background:#003A70;}
-.dl-btn-orange{background:#E67E22;color:#fff;}
-.dl-btn-orange:hover{background:#C86A10;}
-.dl-btn-outline{background:#fff;color:#005EAD;border:2px solid #005EAD;}
-.dl-btn-outline:hover{background:#E8F1FB;}
-.dl-btn:disabled{opacity:0.45;cursor:not-allowed;}
+.dl-primary {background:#005EAD;color:#fff;}
+.dl-primary:hover{background:#003A70;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,94,173,0.35);}
+.dl-outline  {background:#fff;color:#005EAD;border:2px solid #005EAD;}
+.dl-outline:hover {background:#E8F1FB;transform:translateY(-1px);}
+.dl-orange   {background:#E67E22;color:#fff;}
+.dl-orange:hover{background:#C86A10;transform:translateY(-1px);box-shadow:0 4px 14px rgba(230,126,34,0.35);}
 
-/* ── Guide buttons row ── */
+/* ── Changelog ── */
+.changelog{
+  background:#F5F8FC;border-radius:10px;padding:14px 16px;
+  margin-bottom:18px;font-size:0.82rem;line-height:1.7;
+}
+.changelog strong{color:#003A70;}
+.changelog ul{padding-left:18px;}
+
+/* ── Guide row ── */
 .guide-row{
-  display:flex;gap:12px;flex-wrap:wrap;
-  padding-top:16px;border-top:1px solid #E5EFF8;margin-top:16px;
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  padding-top:18px;border-top:1px solid #E8F1FB;
 }
-.guide-block{flex:1;min-width:160px;}
 .guide-block .guide-lang{
-  font-size:0.75rem;font-weight:700;color:#6B7280;
-  margin-bottom:7px;text-transform:uppercase;letter-spacing:0.06em;
+  font-size:0.72rem;font-weight:700;color:#6B7280;
+  margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;
 }
 
-/* ── Bilingual section ── */
-.bilingual-notice{
-  background:#FFF8ED;border:1.5px solid #F0C040;border-radius:10px;
-  padding:14px 16px;font-size:0.82rem;color:#5A3E00;
-  line-height:1.65;margin-bottom:18px;
-}
-.bilingual-notice strong{color:#7A4200;}
-.bilingual-dl-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-.bilingual-dl-info{font-size:0.78rem;color:#6B7280;line-height:1.5;}
-
-/* ── Update history ── */
-.history-section{margin-top:8px;}
+/* ── History ── */
+.history-wrap{padding-top:14px;border-top:1px solid #E8F1FB;margin-top:4px;}
 .history-toggle{
   background:none;border:none;color:#005EAD;font-family:inherit;
-  font-size:0.82rem;font-weight:700;cursor:pointer;padding:6px 0;
-  display:flex;align-items:center;gap:6px;
+  font-size:0.82rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;gap:6px;padding:4px 0;
 }
 .history-list{margin-top:12px;display:none;}
 .history-list.open{display:block;}
-.release-item{
-  padding:12px 14px;border-radius:8px;background:#F5F8FC;
-  margin-bottom:8px;font-size:0.82rem;
+.history-item{
+  background:#F5F8FC;border-radius:8px;padding:12px 14px;
+  margin-bottom:8px;font-size:0.80rem;
 }
-.release-item .r-ver{font-weight:700;color:#003A70;}
-.release-item .r-date{color:#6B7280;font-size:0.75rem;margin-left:8px;}
-.release-item ul{margin-top:6px;padding-left:18px;color:#374151;line-height:1.6;}
+.history-item .hver{font-weight:700;color:#003A70;}
+.history-item .hdate{color:#6B7280;margin-left:8px;}
+.history-item ul{margin-top:6px;padding-left:16px;color:#374151;line-height:1.65;}
 
-/* ── Loading ── */
-.loading-text{color:#6B7280;font-size:0.85rem;padding:8px 0;}
-.loading-spin{
-  display:inline-block;width:14px;height:14px;
-  border:2px solid #C5DEFF;border-top-color:#005EAD;
-  border-radius:50%;animation:spin 0.7s linear infinite;margin-right:6px;
+/* ── Bilingual notice ── */
+.bilingual-notice{
+  background:linear-gradient(135deg,#FFF8ED 0%,#FFF3DE 100%);
+  border:2px solid #F0C040;border-radius:12px;
+  padding:18px 20px;margin-bottom:20px;
 }
-@keyframes spin{to{transform:rotate(360deg);}}
+.bilingual-notice .notice-head{
+  display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;
+}
+.bilingual-notice .notice-icon{font-size:1.4rem;flex-shrink:0;}
+.bilingual-notice .notice-title{font-size:0.92rem;font-weight:700;color:#7A4200;line-height:1.4;}
+.bilingual-notice .notice-body{font-size:0.83rem;color:#5A3E00;line-height:1.75;}
+.bilingual-notice .notice-lang-block{
+  background:rgba(255,255,255,0.6);border-radius:8px;
+  padding:10px 14px;margin-top:10px;font-size:0.80rem;
+  color:#5A3E00;line-height:1.8;border-left:3px solid #E67E22;
+}
+.bilingual-notice .lang-tag{
+  display:inline-block;font-size:0.68rem;font-weight:700;
+  background:#E67E22;color:#fff;padding:1px 7px;border-radius:10px;
+  margin-right:6px;vertical-align:middle;
+}
 
-/* ── Admin block ── */
+/* ── Bilingual DL ── */
+.bilingual-dl{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  padding-top:18px;border-top:1px solid #F0C040;
+}
+.bilingual-dl-info{font-size:0.78rem;color:#7A4200;line-height:1.6;}
+.bilingual-dl-info .langs{font-weight:700;}
+
+/* ── Admin ── */
 .admin-block{
-  background:#F0F4F8;border-radius:10px;padding:14px 16px;
-  font-size:0.78rem;color:#6B7280;margin-top:20px;line-height:1.6;
+  background:#F0F4F8;border-radius:10px;margin-top:20px;
 }
-.admin-block summary{cursor:pointer;font-weight:700;color:#6B7280;}
-.admin-block a{color:#005EAD;}
+.admin-block summary{
+  cursor:pointer;font-weight:700;color:#6B7280;font-size:0.78rem;
+  padding:12px 16px;list-style:none;display:flex;align-items:center;gap:6px;
+}
+.admin-block summary::-webkit-details-marker{display:none;}
+.admin-inner{padding:0 16px 14px;font-size:0.78rem;color:#6B7280;line-height:1.7;}
+.admin-inner code{background:#E5EFF8;padding:1px 6px;border-radius:4px;font-size:0.75rem;}
+.admin-inner a{color:#005EAD;}
 
 /* ── Footer ── */
-.site-footer{
-  text-align:center;padding:24px;font-size:0.75rem;color:#9CA3AF;
-}
+.site-footer{text-align:center;padding:24px;font-size:0.75rem;color:#9CA3AF;}
+.site-footer a{color:#9CA3AF;text-decoration:none;}
+.site-footer a:hover{color:#005EAD;}
 
-@media(max-width:480px){
-  .version-block{flex-direction:column;align-items:flex-start;}
-  .guide-row{flex-direction:column;}
-  .bilingual-dl-row{flex-direction:column;}
+/* ── Loading ── */
+.spin{display:inline-block;width:13px;height:13px;border:2px solid #C5DEFF;border-top-color:#005EAD;border-radius:50%;animation:spin .7s linear infinite;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+@media(max-width:520px){
+  .guide-row{grid-template-columns:1fr;}
+  .app-dl-wrap{flex-direction:column;align-items:flex-start;}
+  .bilingual-dl{flex-direction:column;}
 }
 </style>
 </head>
@@ -138,233 +175,235 @@ body{font-family:'Segoe UI',Arial,'Noto Sans Lao','Noto Sans Khmer',sans-serif;
 
 <header class="site-header">
   <span class="logo">📱</span>
-  <h1>OurDaisy — Downloads</h1>
-  <span class="sub">EFA Japan</span>
+  <div>
+    <h1>OurDaisy — Downloads</h1>
+    <div class="tagline">App updates &amp; guides</div>
+  </div>
+  <span class="efamark">EFA Japan</span>
 </header>
 
 <div class="container">
 
-  <!-- ══ Section 1: OurDaisy App ══ -->
+  <!-- ══ Section 1: App ══ -->
   <div class="section-label label-app">📱 OurDaisy App — Single Language Edition</div>
 
   <div class="card card-app">
-    <div class="version-block">
-      <div class="version-info">
-        <h2>OurDaisy</h2>
-        <div class="ver-tag" id="latestVer">Loading...</div>
-        <div class="ver-date" id="latestDate"></div>
-      </div>
-      <a id="dlBtn" class="dl-btn dl-btn-primary" href="#" target="_blank" rel="noopener">
-        ↓ Download App (.zip)
-      </a>
+    <div class="card-header">
+      <span class="icon">📱</span>
+      <h2>OurDaisy App</h2>
+      <span class="badge-ver" id="verBadge"><span class="spin"></span>Loading...</span>
     </div>
+    <div class="card-body">
 
-    <!-- Changelog -->
-    <div id="changelogBlock" style="font-size:0.82rem;line-height:1.65;margin-bottom:16px;display:none;">
-      <div id="changelogContent"></div>
-    </div>
-
-    <!-- User Guides -->
-    <div class="guide-row">
-      <div class="guide-block">
-        <div class="guide-lang">📖 ຄູ່ມືການໃຊ້ງານ — Lao</div>
-        <a id="guideLao" class="dl-btn dl-btn-outline" href="PLACEHOLDER_LAO_GUIDE" target="_blank" rel="noopener">
-          ↓ OurDaisy User Guide (Lao)
+      <!-- App DL -->
+      <div class="app-dl-wrap">
+        <a id="dlBtn" class="dl-btn dl-primary" href="#" style="display:none;" target="_blank" rel="noopener">
+          ↓ Download App (.zip)
         </a>
+        <span class="app-dl-date" id="dlDate"></span>
       </div>
-      <div class="guide-block">
-        <div class="guide-lang">📖 សៀវភៅណែនាំ — Khmer</div>
-        <a id="guideKhm" class="dl-btn dl-btn-outline" href="PLACEHOLDER_KHM_GUIDE" target="_blank" rel="noopener">
-          ↓ OurDaisy User Guide (Khmer)
-        </a>
-      </div>
-    </div>
 
-    <!-- Update history -->
-    <div class="history-section">
-      <button class="history-toggle" onclick="toggleHistory()">
-        <span id="histArrow">▶</span> Update History
-      </button>
-      <div class="history-list" id="historyList"></div>
+      <!-- Changelog -->
+      <div class="changelog" id="changelog" style="display:none;"></div>
+
+      <!-- User Guides -->
+      <div class="guide-row">
+        <div class="guide-block">
+          <div class="guide-lang">📖 ຄູ່ມືການໃຊ້ງານ — LAO</div>
+          <a id="guideLao" class="dl-btn dl-outline" href="#" target="_blank" rel="noopener">
+            ↓ OurDaisy User Guide (Lao)
+          </a>
+        </div>
+        <div class="guide-block">
+          <div class="guide-lang">📖 សៀវភៅណែនាំ — KHMER</div>
+          <a id="guideKhm" class="dl-btn dl-outline" href="#" target="_blank" rel="noopener">
+            ↓ OurDaisy User Guide (Khmer)
+          </a>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="history-wrap" id="historyWrap" style="display:none;">
+        <button class="history-toggle" onclick="toggleHistory()">
+          <span id="histArrow">▶</span> Update History
+        </button>
+        <div class="history-list" id="historyList"></div>
+      </div>
+
     </div>
   </div>
 
-  <!-- ══ Section 2: EFA Bilingual Project ══ -->
-  <div class="section-label label-bilingual" style="margin-top:12px;">
-    📚 EFA Bilingual DAISY Project — Collaboration Guide
+  <!-- ══ Section 2: Bilingual ══ -->
+  <div class="section-label label-bilingual" style="margin-top:8px;">
+    📚 EFA Bilingual DAISY Project
   </div>
 
   <div class="card card-bilingual">
-    <div class="bilingual-notice">
-      <strong>⚠️ This section is for local staff collaborating with EFA Japan's bilingual DAISY book project.</strong><br><br>
-      The guide below explains how to use the <strong>OurDAISY local staff web form</strong> to reserve tasks, enter book information, and submit completion reports.<br><br>
-      <strong>This is different from your own language DAISY library system.</strong><br>
-      ຄູ່ມືນີ້ແມ່ນສຳລັບໂຄງການ DAISY ສອງພາສາຂອງ EFA ຍີ່ປຸ່ນ ບໍ່ແມ່ນລະບົບຫໍສະໝຸດພາສາດຽວ.<br>
-      ឯកសារនេះសម្រាប់គម្រោង DAISY ជាភាសាទ្វេរបស់ EFA ជប៉ុន មិនមែនប្រព័ន្ធបណ្ណាល័យភាសាតែមួយ។
+    <div class="card-header">
+      <span class="icon">📚</span>
+      <h2>EFA Bilingual DAISY — Collaboration Guide</h2>
     </div>
+    <div class="card-body">
 
-    <div class="bilingual-dl-row">
-      <a id="guideBlingual" class="dl-btn dl-btn-orange" href="PLACEHOLDER_BILINGUAL_GUIDE" target="_blank" rel="noopener">
-        ↓ Download Collaboration Guide (.zip)
-      </a>
-      <div class="bilingual-dl-info">
-        Includes 4 languages:<br>
-        English / 日本語 / ລາວ / ខ្មែរ
+      <div class="bilingual-notice">
+        <div class="notice-head">
+          <span class="notice-icon">🤝</span>
+          <div class="notice-title">
+            Collaboration guide for local staff supporting EFA Japan's bilingual DAISY book project
+          </div>
+        </div>
+        <div class="notice-body">
+          EFA Japan (a Japanese NPO) creates bilingual DAISY audiobooks for children of foreign roots living in Japan — in both their mother tongue (Lao, Khmer, etc.) and Japanese. As a local staff member, your role is to create or verify the Word text in your language, and enter book information (author, publisher, etc.) using the form below.<br><br>
+          <strong>This is a separate project from your own language DAISY library system.</strong>
+        </div>
+
+        <!-- Lao -->
+        <div class="bilingual-notice notice-lang-block">
+          <span class="lang-tag">ລາວ</span>
+          ໂຄງການ EFA ຍີ່ປຸ່ນ ສ້າງໜັງສື DAISY ສອງພາສາ (ພາສາແມ່ + ພາສາຍີ່ປຸ່ນ) ສຳລັບເດັກນ້ອຍຕ່າງຊາດໃນຍີ່ປຸ່ນ. ໜ້າທີ່ຂອງທ່ານ: ສ້າງ ຫຼື ກວດສອບຂໍ້ຄວາມ Word ໃນພາສາລາວ, ແລະ ໃສ່ຂໍ້ມູນໜັງສື (ຊື່ຜູ້ຂຽນ ແລະ ອື່ນໆ). <strong>ໂຄງການນີ້ແຕກຕ່າງຈາກລະບົບຫໍສະໝຸດ DAISY ພາສາດຽວ.</strong>
+        </div>
+
+        <!-- Khmer -->
+        <div class="bilingual-notice notice-lang-block">
+          <span class="lang-tag">ខ្មែរ</span>
+          គម្រោង EFA Japan បង្កើតសៀវភៅ DAISY ពីរភាសា (ភាសាមាតុភូមិ + ភាសាជប៉ុន) សម្រាប់កុមារនៃប្រភពបរទេសនៅជប៉ុន។ តួនាទីរបស់អ្នក: បង្កើត ឬ ពិនិត្យអត្ថបទ Word ជាភាសារបស់អ្នក និងបញ្ចូលព័ត៌មានសៀវភៅ (ឈ្មោះអ្នកនិពន្ធ ជាដើម)។ <strong>គម្រោងនេះខុសពីប្រព័ន្ធបណ្ណាល័យ DAISY ភាសាតែមួយ។</strong>
+        </div>
       </div>
+
+      <div class="bilingual-dl">
+        <a id="guideBilingual" class="dl-btn dl-orange" href="#" target="_blank" rel="noopener">
+          ↓ Download Collaboration Guide (.zip)
+        </a>
+        <div class="bilingual-dl-info">
+          <div class="langs">English / ລາວ / ខ្មែរ</div>
+          <div>Local Staff Form: <a href="https://efajapan.github.io/ourdaisy-studio/local-staff-form.html" target="_blank" rel="noopener" style="color:#E67E22;font-weight:700;">Open form →</a></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Admin (collapsed) -->
+  <!-- Admin -->
   <details class="admin-block">
     <summary>🔧 EFA Admin — Publish new release</summary>
-    <div style="margin-top:10px;">
+    <div class="admin-inner">
       Drop <code>OurDaisy_vX.X.X_dist.zip</code> + <code>changelog_vX.X.X.txt</code> into the
-      <a id="releaseFolderLink" href="#" target="_blank" rel="noopener">release folder</a>.
+      <a id="relFolderLink" href="#" target="_blank" rel="noopener">release folder</a>.
       Auto-detected within 1 hour, or
-      <button onclick="scanNow()" style="background:none;border:none;color:#005EAD;cursor:pointer;font-size:0.78rem;font-weight:700;text-decoration:underline;padding:0;">scan now</button>.
+      <button onclick="scanNow()" style="background:none;border:none;color:#005EAD;cursor:pointer;font-size:0.78rem;font-weight:700;text-decoration:underline;padding:0;">scan now</button>.<br>
+      Guides: drop <code>*UserGuide*.zip</code> (Lao / Khmer) and <code>EFAManual_LocalStaff*.zip</code> into each folder.
     </div>
   </details>
 
-</div><!-- /container -->
+</div>
 
 <footer class="site-footer">
-  <a href="https://www.efa-japan.org" target="_blank" rel="noopener" style="color:#9CA3AF;">EFA Japan</a>
-  · <a href="https://efajapan.github.io/ourdaisy/" target="_blank" rel="noopener" style="color:#9CA3AF;">OurDaisy Library</a>
-  · © 2026 EFA Japan
+  <a href="https://www.efa-japan.org" target="_blank" rel="noopener">EFA Japan</a>
+  &nbsp;·&nbsp;
+  <a href="https://efajapan.github.io/ourdaisy/" target="_blank" rel="noopener">OurDaisy Library</a>
+  &nbsp;·&nbsp; © 2026 EFA Japan
 </footer>
 
 <script>
-// ── CONFIG（GAS URLのみ管理・ファイルリンクはGAS動的取得）────
-var CONFIG = {
-  gasUrl:          'https://script.google.com/macros/s/AKfycbytpG_LtTkHYHBJrTPrlKfuhILzw0em3Ue7n0k2cN3uNWTyEs0tjWPy5O17_mN3C-rV/exec',
-  releaseFolderUrl:'https://drive.google.com/drive/folders/12vIl7AEHDRmKoQhw1MVMWLxvvB1sILlG',
-};
+var GAS_URL    = 'https://script.google.com/macros/s/AKfycbytpG_LtTkHYHBJrTPrlKfuhILzw0em3Ue7n0k2cN3uNWTyEs0tjWPy5O17_mN3C-rV/exec';
+var REL_FOLDER = 'https://drive.google.com/drive/folders/12vIl7AEHDRmKoQhw1MVMWLxvvB1sILlG';
 
-// ── 初期化 ──────────────────────────────────────────────────────
 window.addEventListener('load', function() {
-  document.getElementById('releaseFolderLink').href = CONFIG.releaseFolderUrl;
-  loadReleaseData();
-  loadManualLinks();
+  document.getElementById('relFolderLink').href = REL_FOLDER;
+  loadAppRelease();
+  loadManuals();
 });
 
-// ── マニュアルリンクをGASから動的取得 ───────────────────────────
-function loadManualLinks() {
-  fetch(CONFIG.gasUrl + '?action=manuals')
+// ── アプリリリース取得 ──────────────────────────────────────────
+function loadAppRelease() {
+  fetch(GAS_URL)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      // GASのレスポンス形式に合わせて両パターン対応
+      var releases = data.releases || (data.latest ? [data.latest].concat(data.history||[]) : []);
+      var published = releases.filter(function(r){ return r.published !== false; });
+
+      if (!published.length) {
+        document.getElementById('verBadge').textContent = 'No releases';
+        return;
+      }
+      var latest = published[0];
+      var ver = latest.version || latest.ver || '—';
+      document.getElementById('verBadge').textContent = 'v' + ver + '  LATEST';
+
+      var dateStr = latest.date || latest.released_at || '';
+      document.getElementById('dlDate').textContent = dateStr;
+
+      // DLボタン：URLがある場合のみ表示
+      var url = latest.download_url || latest.url || latest.zip_url || '';
+      if (url) {
+        var btn = document.getElementById('dlBtn');
+        btn.href = url;
+        btn.style.display = 'inline-flex';
+      }
+
+      // Changelog
+      var hasNew  = latest.new_features  && latest.new_features.length;
+      var hasFix  = latest.bug_fixes     && latest.bug_fixes.length;
+      var hasImp  = latest.improvements  && latest.improvements.length;
+      if (hasNew || hasFix || hasImp) {
+        var html = '';
+        if (hasNew) html += '<strong>✦ New</strong><ul>'  + latest.new_features.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
+        if (hasFix) html += '<strong>✦ Fixes</strong><ul>'+ latest.bug_fixes.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
+        if (hasImp) html += '<strong>✦ Improvements</strong><ul>'+ latest.improvements.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
+        var cl = document.getElementById('changelog');
+        cl.innerHTML = html; cl.style.display = 'block';
+      }
+
+      // 履歴（2件以上の場合のみ表示）
+      if (published.length > 1) {
+        var hw = document.getElementById('historyWrap');
+        hw.style.display = 'block';
+        var html2 = '';
+        published.slice(1).forEach(function(r) {
+          html2 += '<div class="history-item">';
+          html2 += '<span class="hver">v'+esc(r.version||r.ver||'?')+'</span>';
+          html2 += '<span class="hdate">'+esc(r.date||r.released_at||'')+'</span>';
+          if (r.new_features && r.new_features.length)
+            html2 += '<ul>'+r.new_features.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
+          html2 += '</div>';
+        });
+        document.getElementById('historyList').innerHTML = html2;
+      }
+    })
+    .catch(function(){ document.getElementById('verBadge').textContent = '—'; });
+}
+
+// ── マニュアルDLリンク取得 ────────────────────────────────────
+function loadManuals() {
+  fetch(GAS_URL + '?action=manuals')
     .then(function(r){ return r.json(); })
     .then(function(data){
       if (data.status !== 'ok') return;
       var m = data.manuals;
-      // ラオス語マニュアル
-      if (m.lao && m.lao.download_url) {
-        var btn = document.getElementById('guideLao');
-        btn.href = m.lao.download_url;
-        btn.title = m.lao.filename + ' (' + m.lao.size_kb + ' KB)';
-      }
-      // クメール語マニュアル
-      if (m.khm && m.khm.download_url) {
-        var btn = document.getElementById('guideKhm');
-        btn.href = m.khm.download_url;
-        btn.title = m.khm.filename + ' (' + m.khm.size_kb + ' KB)';
-      }
-      // バイリンガルガイド
-      if (m.bilingual && m.bilingual.download_url) {
-        var btn = document.getElementById('guideBlingual');
-        btn.href = m.bilingual.download_url;
-        btn.title = m.bilingual.filename + ' (' + m.bilingual.size_kb + ' KB)';
-      }
+      if (m.lao      && m.lao.download_url)      document.getElementById('guideLao').href      = m.lao.download_url;
+      if (m.khm      && m.khm.download_url)      document.getElementById('guideKhm').href      = m.khm.download_url;
+      if (m.bilingual && m.bilingual.download_url) document.getElementById('guideBilingual').href = m.bilingual.download_url;
     })
     .catch(function(){
-      // GAS未更新の場合はフォルダURLにフォールバック
-      document.getElementById('guideLao').href =
-        'https://drive.google.com/drive/folders/1MxL0aGqiK8kTop-SyvD3g7-npYLAOeJb';
-      document.getElementById('guideKhm').href =
-        'https://drive.google.com/drive/folders/17cHW50mgtCIOj4z5Z9yI_E101YeP-t4O';
-      document.getElementById('guideBlingual').href =
-        'https://drive.google.com/drive/folders/1838sqnI6IfOOvR8RK31o4DgrlZycol3S';
+      // フォールバック
+      document.getElementById('guideLao').href      = 'https://drive.google.com/drive/folders/1MxL0aGqiK8kTop-SyvD3g7-npYLAOeJb';
+      document.getElementById('guideKhm').href      = 'https://drive.google.com/drive/folders/17cHW50mgtCIOj4z5Z9yI_E101YeP-t4O';
+      document.getElementById('guideBilingual').href = 'https://drive.google.com/drive/folders/1838sqnI6IfOOvR8RK31o4DgrlZycol3S';
     });
 }
 
-// ── GASからリリースデータ取得 ────────────────────────────────────
-function loadReleaseData() {
-  document.getElementById('latestVer').innerHTML =
-    '<span class="loading-spin"></span> Loading...';
-  fetch(CONFIG.gasUrl)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      var releases = data.releases || [];
-      var published = releases.filter(function(r){ return r.published !== false; });
-      if (!published.length) {
-        document.getElementById('latestVer').textContent = 'No releases';
-        return;
-      }
-      // 最新バージョン
-      var latest = published[0];
-      document.getElementById('latestVer').textContent = 'v' + latest.version + '  LATEST';
-      document.getElementById('latestDate').textContent = latest.date || '';
-      var dlBtn = document.getElementById('dlBtn');
-      if (latest.download_url) {
-        dlBtn.href = latest.download_url;
-      } else {
-        dlBtn.textContent = 'Not available';
-        dlBtn.style.opacity = '0.45';
-      }
-      // Changelog
-      if (latest.new_features || latest.bug_fixes || latest.improvements) {
-        var html = '';
-        if (latest.new_features && latest.new_features.length)
-          html += '<strong style="color:#2A9D5C;">✦ New</strong><ul>' +
-            latest.new_features.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
-        if (latest.bug_fixes && latest.bug_fixes.length)
-          html += '<strong style="color:#C0392B;">✦ Fixes</strong><ul>' +
-            latest.bug_fixes.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
-        if (latest.improvements && latest.improvements.length)
-          html += '<strong style="color:#005EAD;">✦ Improvements</strong><ul>' +
-            latest.improvements.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
-        document.getElementById('changelogContent').innerHTML = html;
-        document.getElementById('changelogBlock').style.display = 'block';
-      }
-      // History
-      if (published.length > 1) {
-        var histHtml = '';
-        published.slice(1).forEach(function(r) {
-          histHtml += '<div class="release-item">';
-          histHtml += '<span class="r-ver">v' + escHtml(r.version) + '</span>';
-          histHtml += '<span class="r-date">' + escHtml(r.date || '') + '</span>';
-          if (r.new_features && r.new_features.length) {
-            histHtml += '<ul>' + r.new_features.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
-          }
-          histHtml += '</div>';
-        });
-        document.getElementById('historyList').innerHTML = histHtml;
-      }
-    })
-    .catch(function(){
-      document.getElementById('latestVer').textContent = '—';
-      document.getElementById('latestDate').textContent = 'Could not load data';
-    });
-}
-
-// ── 履歴トグル ──────────────────────────────────────────────────
 function toggleHistory() {
-  var list = document.getElementById('historyList');
+  var list  = document.getElementById('historyList');
   var arrow = document.getElementById('histArrow');
-  var open = list.classList.toggle('open');
+  var open  = list.classList.toggle('open');
   arrow.textContent = open ? '▼' : '▶';
 }
-
-// ── 手動スキャン ────────────────────────────────────────────────
 function scanNow() {
-  fetch(CONFIG.gasUrl + '?action=scan')
-    .then(function(){ setTimeout(loadReleaseData, 2000); })
-    .catch(function(){});
-  alert('Scan started. The page will refresh in a moment.');
+  fetch(GAS_URL + '?action=scan').then(function(){ setTimeout(loadAppRelease, 2000); }).catch(function(){});
+  alert('Scan started.');
 }
-
-// ── XSS対策 ────────────────────────────────────────────────────
-function escHtml(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
 </html>
