@@ -3,650 +3,367 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OurDaisy — App Updates | EFA Japan</title>
+<title>OurDaisy — Downloads | EFA Japan</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@300;400;600;700&display=swap');
+/* ── Reset & Base ── */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,'Noto Sans Lao','Noto Sans Khmer',sans-serif;
+     background:#F0F4F8;color:#1A2A3A;min-height:100vh;}
 
-  :root {
-    --efa-blue:   #0065A4;
-    --efa-dark:   #004070;
-    --efa-light:  #E6F2FA;
-    --efa-accent: #F39800;
-    --bg:         #F4F7FA;
-    --surface:    #FFFFFF;
-    --surface2:   #EEF3F8;
-    --text:       #1A2332;
-    --muted:      #6B7A8D;
-    --border:     #D0DDE8;
-    --green:      #16A34A;
-    --mono:       'IBM Plex Mono', monospace;
-    --sans:       'Sora', sans-serif;
-  }
+/* ── Header ── */
+.site-header{
+  background:linear-gradient(135deg,#005EAD 0%,#003A70 100%);
+  padding:18px 24px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 12px rgba(0,94,173,0.25);
+}
+.site-header .logo{font-size:1.5rem;}
+.site-header h1{color:#fff;font-size:1.1rem;font-weight:700;}
+.site-header .sub{color:rgba(255,255,255,0.65);font-size:0.78rem;margin-left:auto;}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--text); }
+/* ── Layout ── */
+.container{max-width:700px;margin:0 auto;padding:28px 20px 60px;}
 
-  /* NAV */
-  .nav {
-    background: var(--efa-dark);
-    border-bottom: 2px solid var(--efa-accent);
-    padding: 0 1.5rem;
-    height: 52px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .nav-brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; }
-  .nav-logo {
-    width: 30px; height: 30px; background: var(--efa-accent); border-radius: 7px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 12px; font-weight: 700; color: #fff;
-  }
-  .nav-name { font-size: 14px; font-weight: 600; }
-  .nav-sub  { font-size: 11px; opacity: .55; font-weight: 300; }
-  .nav-auth {
-    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
-    border-radius: 20px; padding: 4px 12px;
-    font-size: 11px; color: rgba(255,255,255,.8);
-    display: flex; align-items: center; gap: 5px;
-    display: none;  /* shown when logged in */
-  }
-  .nav-auth.visible { display: flex; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; }
-  .dot-green  { background: #4ADE80; }
-  .dot-orange { background: var(--efa-accent); }
+/* ── Section titles ── */
+.section-label{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;
+}
+.label-app{background:#E8F1FB;color:#005EAD;}
+.label-bilingual{background:#FFF0D4;color:#7A4200;}
 
-  /* HERO */
-  .hero {
-    background: linear-gradient(140deg, var(--efa-dark) 0%, #005A8E 55%, #0077B6 100%);
-    padding: 2.5rem 1.5rem 2rem;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; top: -60px; right: -60px;
-    width: 320px; height: 320px; border-radius: 50%;
-    background: rgba(255,255,255,.03); pointer-events: none;
-  }
-  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
-  .hero-eye {
-    font-family: var(--mono); font-size: 10px; font-weight: 500;
-    color: var(--efa-accent); letter-spacing: .14em; text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .hero-title {
-    font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 700;
-    color: #fff; letter-spacing: -.01em; margin-bottom: 6px;
-  }
-  .hero-title span { color: var(--efa-accent); }
-  .hero-desc { font-size: 13px; color: rgba(255,255,255,.6); font-weight: 300; margin-bottom: 1.5rem; }
+/* ── Card ── */
+.card{
+  background:#fff;border-radius:14px;padding:24px;
+  box-shadow:0 4px 20px rgba(0,94,173,0.09);margin-bottom:16px;
+}
+.card-app{border-top:4px solid #005EAD;}
+.card-bilingual{border-top:4px solid #E67E22;}
 
-  /* VERSION CARD */
-  .vcard {
-    background: rgba(255,255,255,.09); backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,.14); border-radius: 14px;
-    padding: 1.25rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem;
-    align-items: center;
-  }
-  @media(max-width:600px){ .vcard { grid-template-columns: 1fr; } }
-  .vtag {
-    font-family: var(--mono); font-size: 26px; font-weight: 600; color: #fff;
-    display: flex; align-items: baseline; gap: 8px;
-  }
-  .vtag small { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.45); font-family: var(--sans); }
-  .vstatus {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.3);
-    border-radius: 20px; padding: 2px 9px;
-    font-size: 10px; color: #4ADE80; font-weight: 500; margin-left: 8px;
-  }
-  .vmeta { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,.45); margin-top: 4px; }
-  .vchips { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
-  .chip {
-    border-radius: 5px; padding: 2px 8px; font-size: 10px; font-family: var(--mono);
-    border: 1px solid transparent;
-  }
-  .chip-new  { background: rgba(74,222,128,.1);  border-color: rgba(74,222,128,.3);  color: #6EE7B7; }
-  .chip-fix  { background: rgba(251,191,36,.1);  border-color: rgba(251,191,36,.3);  color: #FCD34D; }
-  .chip-imp  { background: rgba(147,197,253,.1); border-color: rgba(147,197,253,.3); color: #93C5FD; }
-  .dl-btn {
-    background: var(--efa-accent); color: #fff; font-weight: 700;
-    padding: 12px 22px; border-radius: 11px; border: none;
-    font-size: 13px; font-family: var(--sans); cursor: pointer;
-    white-space: nowrap; text-decoration: none;
-    box-shadow: 0 4px 18px rgba(243,152,0,.35);
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-    transition: transform .15s, box-shadow .15s;
-  }
-  .dl-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(243,152,0,.45); }
-  .dl-btn-sub { font-size: 10px; font-weight: 400; opacity: .75; font-family: var(--mono); }
+/* ── App version block ── */
+.version-block{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;margin-bottom:20px;
+}
+.version-info h2{font-size:1.1rem;font-weight:700;color:#003A70;}
+.version-info .ver-tag{
+  display:inline-block;background:#005EAD;color:#fff;
+  font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:20px;
+  margin-top:4px;
+}
+.version-info .ver-date{font-size:0.78rem;color:#6B7280;margin-top:3px;}
 
-  /* MAIN */
-  .main { max-width: 860px; margin: 0 auto; padding: 1.75rem 1.5rem; }
+/* ── Download Buttons ── */
+.dl-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;border-radius:9px;font-family:inherit;
+  font-size:0.88rem;font-weight:700;cursor:pointer;text-decoration:none;
+  transition:all 0.2s;border:none;
+}
+.dl-btn-primary{background:#005EAD;color:#fff;}
+.dl-btn-primary:hover{background:#003A70;}
+.dl-btn-orange{background:#E67E22;color:#fff;}
+.dl-btn-orange:hover{background:#C86A10;}
+.dl-btn-outline{background:#fff;color:#005EAD;border:2px solid #005EAD;}
+.dl-btn-outline:hover{background:#E8F1FB;}
+.dl-btn:disabled{opacity:0.45;cursor:not-allowed;}
 
-  /* ADMIN PANEL */
-  .admin-panel {
-    background: var(--surface);
-    border: 1.5px dashed var(--border); border-radius: 14px;
-    padding: 1.25rem; margin-bottom: 1.75rem;
-    position: relative; display: none;
-  }
-  .admin-panel.visible { display: block; }
-  .admin-label {
-    position: absolute; top: -10px; left: 16px;
-    background: var(--surface); padding: 0 8px;
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
-    color: var(--muted); text-transform: uppercase; letter-spacing: .1em;
-  }
-  .admin-info {
-    background: var(--efa-light); border-radius: 9px;
-    padding: .9rem 1rem; font-size: 12px; line-height: 1.7;
-    color: var(--efa-dark); margin-bottom: 1rem;
-  }
-  .admin-info strong { font-weight: 600; }
-  .folder-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--efa-blue); color: #fff;
-    border-radius: 7px; padding: 6px 14px; font-size: 12px; font-weight: 600;
-    text-decoration: none; margin-top: 8px;
-    transition: background .15s;
-  }
-  .folder-link:hover { background: var(--efa-dark); }
-  .admin-steps {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-    margin-top: .75rem;
-  }
-  @media(max-width:600px){ .admin-steps { grid-template-columns: 1fr; } }
-  .admin-step {
-    background: var(--bg); border-radius: 9px;
-    padding: .75rem; text-align: center;
-    border: 1px solid var(--border);
-  }
-  .step-n {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: var(--efa-blue); color: #fff;
-    font-family: var(--mono); font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 6px;
-  }
-  .step-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
-  .step-desc  { font-size: 11px; color: var(--muted); line-height: 1.5; font-family: var(--mono); }
-  .btn-scan {
-    background: none; border: 1.5px solid var(--efa-blue);
-    color: var(--efa-blue); border-radius: 7px;
-    padding: 6px 14px; font-size: 12px; font-weight: 600;
-    cursor: pointer; font-family: var(--sans);
-    margin-top: .75rem; transition: background .15s;
-  }
-  .btn-scan:hover { background: var(--efa-light); }
+/* ── Guide buttons row ── */
+.guide-row{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding-top:16px;border-top:1px solid #E5EFF8;margin-top:16px;
+}
+.guide-block{flex:1;min-width:160px;}
+.guide-block .guide-lang{
+  font-size:0.75rem;font-weight:700;color:#6B7280;
+  margin-bottom:7px;text-transform:uppercase;letter-spacing:0.06em;
+}
 
-  /* SECTION HEAD */
-  .sec-head {
-    font-family: var(--mono); font-size: 11px; font-weight: 600;
-    color: var(--muted); text-transform: uppercase; letter-spacing: .1em;
-    border-bottom: 1px solid var(--border); padding-bottom: 10px;
-    margin-bottom: 1.25rem;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .sec-badge {
-    background: var(--efa-light); color: var(--efa-blue);
-    border-radius: 20px; padding: 2px 9px; font-size: 10px;
-  }
+/* ── Bilingual section ── */
+.bilingual-notice{
+  background:#FFF8ED;border:1.5px solid #F0C040;border-radius:10px;
+  padding:14px 16px;font-size:0.82rem;color:#5A3E00;
+  line-height:1.65;margin-bottom:18px;
+}
+.bilingual-notice strong{color:#7A4200;}
+.bilingual-dl-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.bilingual-dl-info{font-size:0.78rem;color:#6B7280;line-height:1.5;}
 
-  /* LOADING */
-  .loading {
-    text-align: center; padding: 3rem;
-    font-family: var(--mono); font-size: 13px; color: var(--muted);
-  }
-  .spinner {
-    width: 32px; height: 32px; border: 3px solid var(--border);
-    border-top-color: var(--efa-blue); border-radius: 50%;
-    animation: spin .8s linear infinite; margin: 0 auto 12px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ── Update history ── */
+.history-section{margin-top:8px;}
+.history-toggle{
+  background:none;border:none;color:#005EAD;font-family:inherit;
+  font-size:0.82rem;font-weight:700;cursor:pointer;padding:6px 0;
+  display:flex;align-items:center;gap:6px;
+}
+.history-list{margin-top:12px;display:none;}
+.history-list.open{display:block;}
+.release-item{
+  padding:12px 14px;border-radius:8px;background:#F5F8FC;
+  margin-bottom:8px;font-size:0.82rem;
+}
+.release-item .r-ver{font-weight:700;color:#003A70;}
+.release-item .r-date{color:#6B7280;font-size:0.75rem;margin-left:8px;}
+.release-item ul{margin-top:6px;padding-left:18px;color:#374151;line-height:1.6;}
 
-  /* ERROR */
-  .error-box {
-    background: #FEF2F2; border: 1px solid #FCA5A5;
-    border-radius: 10px; padding: 1rem; font-size: 13px; color: #991B1B;
-    display: none;
-  }
-  .error-box.visible { display: block; }
+/* ── Loading ── */
+.loading-text{color:#6B7280;font-size:0.85rem;padding:8px 0;}
+.loading-spin{
+  display:inline-block;width:14px;height:14px;
+  border:2px solid #C5DEFF;border-top-color:#005EAD;
+  border-radius:50%;animation:spin 0.7s linear infinite;margin-right:6px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-  /* TIMELINE */
-  .timeline { position: relative; padding-left: 26px; }
-  .timeline::before {
-    content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px;
-    width: 2px; background: var(--border); border-radius: 2px;
-  }
+/* ── Admin block ── */
+.admin-block{
+  background:#F0F4F8;border-radius:10px;padding:14px 16px;
+  font-size:0.78rem;color:#6B7280;margin-top:20px;line-height:1.6;
+}
+.admin-block summary{cursor:pointer;font-weight:700;color:#6B7280;}
+.admin-block a{color:#005EAD;}
 
-  .tl-item {
-    position: relative; margin-bottom: 1.25rem;
-    animation: fadeIn .35s ease forwards; opacity: 0;
-  }
-  @keyframes fadeIn { to { opacity: 1; transform: none; } from { opacity: 0; transform: translateX(-6px); } }
-  .tl-item:nth-child(1){ animation-delay:.04s }
-  .tl-item:nth-child(2){ animation-delay:.08s }
-  .tl-item:nth-child(3){ animation-delay:.12s }
-  .tl-item:nth-child(4){ animation-delay:.16s }
-  .tl-item:nth-child(5){ animation-delay:.20s }
+/* ── Footer ── */
+.site-footer{
+  text-align:center;padding:24px;font-size:0.75rem;color:#9CA3AF;
+}
 
-  .tl-dot {
-    position: absolute; left: -24px; top: 14px;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--surface); border: 2px solid var(--efa-blue); z-index: 1;
-  }
-  .tl-dot.latest {
-    border-color: var(--efa-accent); background: var(--efa-accent);
-    box-shadow: 0 0 0 4px rgba(243,152,0,.18);
-  }
-
-  .tl-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.1rem;
-    transition: box-shadow .2s, border-color .2s;
-  }
-  .tl-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.06); border-color: #B8CFDF; }
-  .tl-card.latest {
-    border-color: rgba(243,152,0,.35);
-    background: linear-gradient(135deg,#FFFBF4,#FFFFFF);
-  }
-
-  .tl-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; margin-bottom: .6rem; }
-  .tl-ver { font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--efa-blue); }
-  .tl-ver.latest { color: var(--efa-accent); }
-  .tl-date { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .badge-latest {
-    background: var(--efa-accent); color: #fff;
-    font-size: 9px; font-weight: 700; border-radius: 5px;
-    padding: 2px 7px; letter-spacing: .06em; text-transform: uppercase;
-    white-space: nowrap; flex-shrink: 0;
-  }
-  .badge-status {
-    font-size: 9px; border-radius: 5px; padding: 2px 7px;
-    font-family: var(--mono); font-weight: 600; text-transform: uppercase;
-    white-space: nowrap; flex-shrink: 0;
-  }
-  .badge-beta    { background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; }
-  .badge-hotfix  { background:#FFF7ED; color:#C2410C; border:1px solid #FED7AA; }
-
-  .tl-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: .7rem; }
-
-  .tl-items { list-style: none; }
-  .tl-items li {
-    font-size: 13px; padding: 2px 0 2px 18px;
-    position: relative; line-height: 1.55;
-  }
-  .tl-items li::before { position: absolute; left: 0; color: var(--border); }
-  .li-new::before     { content: '+'; color: #16A34A; font-weight: 700; }
-  .li-fix::before     { content: '\00D7'; color: #D97706; font-size: 10px; top: 4px; }
-  .li-improve::before { content: '↑'; color: var(--efa-blue); font-weight: 700; }
-
-  .tl-foot {
-    margin-top: .9rem; padding-top: .75rem;
-    border-top: 1px solid var(--surface2);
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
-  }
-  .btn-dl-sm {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: var(--efa-light); color: var(--efa-blue);
-    border: 1px solid #B8CFDF; border-radius: 7px;
-    padding: 5px 12px; font-size: 12px; font-weight: 600;
-    cursor: pointer; text-decoration: none;
-    transition: background .15s; font-family: var(--sans);
-  }
-  .btn-dl-sm:hover { background: #D0E8F5; }
-  .file-size { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-
-  /* OLDER */
-  .show-older { text-align: center; padding: 1rem 0 .5rem; }
-  .btn-older {
-    background: none; border: 1.5px solid var(--border);
-    border-radius: 8px; padding: 7px 18px; font-size: 12px;
-    color: var(--muted); cursor: pointer; font-family: var(--sans);
-    transition: border-color .2s, color .2s;
-  }
-  .btn-older:hover { border-color: var(--efa-blue); color: var(--efa-blue); }
-
-  /* FOOTER */
-  .footer {
-    background: var(--efa-dark); color: rgba(255,255,255,.45);
-    text-align: center; padding: 1.25rem;
-    font-size: 11px; font-family: var(--mono); margin-top: 3rem;
-  }
-  .footer a { color: rgba(255,255,255,.55); text-decoration: none; }
-  .footer a:hover { color: rgba(255,255,255,.85); }
+@media(max-width:480px){
+  .version-block{flex-direction:column;align-items:flex-start;}
+  .guide-row{flex-direction:column;}
+  .bilingual-dl-row{flex-direction:column;}
+}
 </style>
 </head>
 <body>
 
-<!-- ===== CONFIGURATION — edit this section ===== -->
-<script>
-const SITE_CONFIG = {
-  // GAS Web App URL — replace after deploying GAS
-  GAS_URL: "https://script.google.com/macros/s/AKfycbytpG_LtTkHYHBJrTPrlKfuhILzw0em3Ue7n0k2cN3uNWTyEs0tjWPy5O17_mN3C-rV/exec",
+<header class="site-header">
+  <span class="logo">📱</span>
+  <h1>OurDaisy — Downloads</h1>
+  <span class="sub">EFA Japan</span>
+</header>
 
-  // Google Drive "ourdaisy-releases" folder URL (for admin panel)
-  DRIVE_FOLDER_URL: "https://drive.google.com/drive/folders/12vIl7AEHDRmKoQhw1MVMWLxvvB1sILlG",
+<div class="container">
 
-  // Admin Google accounts (shown admin panel)
-  ADMIN_EMAILS: ["info@efa-japan.org"],
+  <!-- ══ Section 1: OurDaisy App ══ -->
+  <div class="section-label label-app">📱 OurDaisy App — Single Language Edition</div>
 
-  // Library system auth cookie name (set by existing library login)
-  AUTH_COOKIE: "efa_library_user",
-
-  // Max releases shown before "Show older"
-  INITIAL_SHOW: 5,
-};
-</script>
-
-<!-- NAV -->
-<nav class="nav">
-  <a href="#" class="nav-brand">
-    <div class="nav-logo">OD</div>
-    <div>
-      <div class="nav-name">OurDaisy Update Center</div>
-      <div class="nav-sub">EFA Japan Multimedia DAISY Library</div>
-    </div>
-  </a>
-  <div class="nav-auth" id="navAuth">
-    <span class="dot dot-green"></span>
-    <span id="navAuthLabel">—</span>
-  </div>
-</nav>
-
-<!-- HERO (populated by JS) -->
-<div class="hero" id="hero">
-  <div class="hero-inner">
-    <div class="hero-eye">● Latest Release</div>
-    <h1 class="hero-title" id="heroTitle">OurDaisy <span id="heroVer">—</span></h1>
-    <p class="hero-desc">Always use the latest version to ensure full compatibility with the library system.</p>
-    <div class="vcard" id="vcard">
-      <div>
-        <div class="vtag" id="vcardVer">— <small>Loading...</small></div>
-        <div class="vmeta" id="vcardMeta"></div>
-        <div class="vchips" id="vcardChips"></div>
+  <div class="card card-app">
+    <div class="version-block">
+      <div class="version-info">
+        <h2>OurDaisy</h2>
+        <div class="ver-tag" id="latestVer">Loading...</div>
+        <div class="ver-date" id="latestDate"></div>
       </div>
-      <a href="#" id="heroDownload" class="dl-btn">
-        ↓ Download
-        <span class="dl-btn-sub" id="heroDlLabel">—</span>
+      <a id="dlBtn" class="dl-btn dl-btn-primary" href="#" target="_blank" rel="noopener">
+        ↓ Download App (.zip)
       </a>
     </div>
+
+    <!-- Changelog -->
+    <div id="changelogBlock" style="font-size:0.82rem;line-height:1.65;margin-bottom:16px;display:none;">
+      <div id="changelogContent"></div>
+    </div>
+
+    <!-- User Guides -->
+    <div class="guide-row">
+      <div class="guide-block">
+        <div class="guide-lang">📖 ຄູ່ມືການໃຊ້ງານ — Lao</div>
+        <a id="guideLao" class="dl-btn dl-btn-outline" href="PLACEHOLDER_LAO_GUIDE" target="_blank" rel="noopener">
+          ↓ OurDaisy User Guide (Lao)
+        </a>
+      </div>
+      <div class="guide-block">
+        <div class="guide-lang">📖 សៀវភៅណែនាំ — Khmer</div>
+        <a id="guideKhm" class="dl-btn dl-btn-outline" href="PLACEHOLDER_KHM_GUIDE" target="_blank" rel="noopener">
+          ↓ OurDaisy User Guide (Khmer)
+        </a>
+      </div>
+    </div>
+
+    <!-- Update history -->
+    <div class="history-section">
+      <button class="history-toggle" onclick="toggleHistory()">
+        <span id="histArrow">▶</span> Update History
+      </button>
+      <div class="history-list" id="historyList"></div>
+    </div>
   </div>
-</div>
 
-<!-- MAIN -->
-<main class="main">
+  <!-- ══ Section 2: EFA Bilingual Project ══ -->
+  <div class="section-label label-bilingual" style="margin-top:12px;">
+    📚 EFA Bilingual DAISY Project — Collaboration Guide
+  </div>
 
-  <!-- ADMIN PANEL -->
-  <div class="admin-panel" id="adminPanel">
-    <span class="admin-label">🔧 EFA Admin — Publish New Release</span>
-    <div class="admin-info">
-      To publish a new version, drop the files into the Google Drive release folder.<br>
-      The page updates automatically within <strong>1 hour</strong>, or click "Scan now" to update immediately.
+  <div class="card card-bilingual">
+    <div class="bilingual-notice">
+      <strong>⚠️ This section is for local staff collaborating with EFA Japan's bilingual DAISY book project.</strong><br><br>
+      The guide below explains how to use the <strong>OurDAISY local staff web form</strong> to reserve tasks, enter book information, and submit completion reports.<br><br>
+      <strong>This is different from your own language DAISY library system.</strong><br>
+      ຄູ່ມືນີ້ແມ່ນສຳລັບໂຄງການ DAISY ສອງພາສາຂອງ EFA ຍີ່ປຸ່ນ ບໍ່ແມ່ນລະບົບຫໍສະໝຸດພາສາດຽວ.<br>
+      ឯកសារនេះសម្រាប់គម្រោង DAISY ជាភាសាទ្វេរបស់ EFA ជប៉ុន មិនមែនប្រព័ន្ធបណ្ណាល័យភាសាតែមួយ។
     </div>
-    <div class="admin-steps">
-      <div class="admin-step">
-        <div class="step-n">1</div>
-        <div class="step-title">App ZIP</div>
-        <div class="step-desc">OurDaisy_v<em>X.X.X</em>_dist.zip</div>
-      </div>
-      <div class="admin-step">
-        <div class="step-n">2</div>
-        <div class="step-title">Changelog</div>
-        <div class="step-desc">changelog_v<em>X.X.X</em>.txt</div>
-      </div>
-      <div class="admin-step">
-        <div class="step-n">3</div>
-        <div class="step-title">Done</div>
-        <div class="step-desc">Auto-detected within 1 hour</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:.75rem;flex-wrap:wrap;">
-      <a id="driveFolderLink" href="#" target="_blank" class="folder-link">
-        📁 Open Release Folder
+
+    <div class="bilingual-dl-row">
+      <a id="guideBlingual" class="dl-btn dl-btn-orange" href="PLACEHOLDER_BILINGUAL_GUIDE" target="_blank" rel="noopener">
+        ↓ Download Collaboration Guide (.zip)
       </a>
-      <button class="btn-scan" onclick="loadReleases(true)">↻ Scan now</button>
+      <div class="bilingual-dl-info">
+        Includes 4 languages:<br>
+        English / 日本語 / ລາວ / ខ្មែរ
+      </div>
     </div>
   </div>
 
-  <!-- ERROR -->
-  <div class="error-box" id="errorBox"></div>
+  <!-- Admin (collapsed) -->
+  <details class="admin-block">
+    <summary>🔧 EFA Admin — Publish new release</summary>
+    <div style="margin-top:10px;">
+      Drop <code>OurDaisy_vX.X.X_dist.zip</code> + <code>changelog_vX.X.X.txt</code> into the
+      <a id="releaseFolderLink" href="#" target="_blank" rel="noopener">release folder</a>.
+      Auto-detected within 1 hour, or
+      <button onclick="scanNow()" style="background:none;border:none;color:#005EAD;cursor:pointer;font-size:0.78rem;font-weight:700;text-decoration:underline;padding:0;">scan now</button>.
+    </div>
+  </details>
 
-  <!-- TIMELINE -->
-  <div class="sec-head">
-    Update History <span class="sec-badge" id="countBadge"></span>
-  </div>
-  <div id="loading" class="loading">
-    <div class="spinner"></div>
-    Loading release data...
-  </div>
-  <div class="timeline" id="timeline" style="display:none"></div>
-  <div class="show-older" id="showOlderWrap" style="display:none">
-    <button class="btn-older" id="showOlderBtn">Show older versions ↓</button>
-  </div>
+</div><!-- /container -->
 
-</main>
-
-<!-- FOOTER -->
-<footer class="footer">
-  OurDaisy Update Center &nbsp;·&nbsp;
-  <a href="https://www.efa-japan.org" target="_blank">EFA Japan</a> &nbsp;·&nbsp;
-  <a href="mailto:info@efa-japan.org">info@efa-japan.org</a> &nbsp;·&nbsp;
-  © 2026 EFA Japan. All rights reserved.
+<footer class="site-footer">
+  <a href="https://www.efa-japan.org" target="_blank" rel="noopener" style="color:#9CA3AF;">EFA Japan</a>
+  · <a href="https://efajapan.github.io/ourdaisy/" target="_blank" rel="noopener" style="color:#9CA3AF;">OurDaisy Library</a>
+  · © 2026 EFA Japan
 </footer>
 
 <script>
-// ============================================================
-// Auth detection
-// ============================================================
-function getLibraryUser() {
-  // Read auth from cookie (set by existing library login system)
-  const match = document.cookie.match(new RegExp('(?:^|; )' + SITE_CONFIG.AUTH_COOKIE + '=([^;]*)'));
-  if (match) {
-    try { return JSON.parse(decodeURIComponent(match[1])); } catch(e) {}
-  }
-  // Fallback: check localStorage
-  try {
-    const u = localStorage.getItem(SITE_CONFIG.AUTH_COOKIE);
-    if (u) return JSON.parse(u);
-  } catch(e) {}
-  return null;
-}
+// ── CONFIG（GAS URLのみ管理・ファイルリンクはGAS動的取得）────
+var CONFIG = {
+  gasUrl:          'https://script.google.com/macros/s/AKfycbytpG_LtTkHYHBJrTPrlKfuhILzw0em3Ue7n0k2cN3uNWTyEs0tjWPy5O17_mN3C-rV/exec',
+  releaseFolderUrl:'https://drive.google.com/drive/folders/12vIl7AEHDRmKoQhw1MVMWLxvvB1sILlG',
+};
 
-function isAdmin(user) {
-  if (!user) return false;
-  return SITE_CONFIG.ADMIN_EMAILS.includes(user.email);
-}
-
-// ============================================================
-// Init
-// ============================================================
-window.addEventListener('DOMContentLoaded', () => {
-  const user = getLibraryUser();
-
-  // Nav auth badge
-  if (user) {
-    const el = document.getElementById('navAuth');
-    el.classList.add('visible');
-    document.getElementById('navAuthLabel').textContent = user.org || user.email || 'Logged in';
-  }
-
-  // Admin panel
-  if (isAdmin(user)) {
-    document.getElementById('adminPanel').classList.add('visible');
-    document.getElementById('driveFolderLink').href = SITE_CONFIG.DRIVE_FOLDER_URL;
-  }
-
-  // Load releases
-  loadReleases(false);
+// ── 初期化 ──────────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  document.getElementById('releaseFolderLink').href = CONFIG.releaseFolderUrl;
+  loadReleaseData();
+  loadManualLinks();
 });
 
-// ============================================================
-// Load releases from GAS
-// ============================================================
-let _allReleases = [];
-
-async function loadReleases(forceRefresh) {
-  const loading  = document.getElementById('loading');
-  const timeline = document.getElementById('timeline');
-  const errBox   = document.getElementById('errorBox');
-
-  loading.style.display  = 'block';
-  timeline.style.display = 'none';
-  errBox.classList.remove('visible');
-
-  try {
-    // GAS Web App URL — append cache-bust if forced
-    const url = SITE_CONFIG.GAS_URL + (forceRefresh ? '?t=' + Date.now() : '');
-    const res  = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
-    if (!json.ok) throw new Error('GAS error');
-
-    _allReleases = json.releases || [];
-    renderTimeline(_allReleases);
-
-  } catch(e) {
-    loading.style.display = 'none';
-    errBox.textContent = 'Could not load release data. Please try again later. (' + e.message + ')';
-    errBox.classList.add('visible');
-  }
+// ── マニュアルリンクをGASから動的取得 ───────────────────────────
+function loadManualLinks() {
+  fetch(CONFIG.gasUrl + '?action=manuals')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data.status !== 'ok') return;
+      var m = data.manuals;
+      // ラオス語マニュアル
+      if (m.lao && m.lao.download_url) {
+        var btn = document.getElementById('guideLao');
+        btn.href = m.lao.download_url;
+        btn.title = m.lao.filename + ' (' + m.lao.size_kb + ' KB)';
+      }
+      // クメール語マニュアル
+      if (m.khm && m.khm.download_url) {
+        var btn = document.getElementById('guideKhm');
+        btn.href = m.khm.download_url;
+        btn.title = m.khm.filename + ' (' + m.khm.size_kb + ' KB)';
+      }
+      // バイリンガルガイド
+      if (m.bilingual && m.bilingual.download_url) {
+        var btn = document.getElementById('guideBlingual');
+        btn.href = m.bilingual.download_url;
+        btn.title = m.bilingual.filename + ' (' + m.bilingual.size_kb + ' KB)';
+      }
+    })
+    .catch(function(){
+      // GAS未更新の場合はフォルダURLにフォールバック
+      document.getElementById('guideLao').href =
+        'https://drive.google.com/drive/folders/1MxL0aGqiK8kTop-SyvD3g7-npYLAOeJb';
+      document.getElementById('guideKhm').href =
+        'https://drive.google.com/drive/folders/17cHW50mgtCIOj4z5Z9yI_E101YeP-t4O';
+      document.getElementById('guideBlingual').href =
+        'https://drive.google.com/drive/folders/1838sqnI6IfOOvR8RK31o4DgrlZycol3S';
+    });
 }
 
-// ============================================================
-// Render hero + timeline
-// ============================================================
-function renderTimeline(releases) {
-  const loading  = document.getElementById('loading');
-  const timeline = document.getElementById('timeline');
-
-  loading.style.display = 'none';
-
-  if (!releases.length) {
-    timeline.style.display = 'block';
-    timeline.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:1rem 0">No releases found.</p>';
-    return;
-  }
-
-  // Hero — latest
-  const latest = releases[0];
-  updateHero(latest);
-
-  // Badge count
-  document.getElementById('countBadge').textContent = releases.length + ' release' + (releases.length > 1 ? 's' : '');
-
-  // Render items
-  timeline.innerHTML = '';
-  releases.forEach((rel, i) => {
-    timeline.appendChild(buildCard(rel, i === 0));
-  });
-
-  timeline.style.display = 'block';
-
-  // Older toggle
-  handleOlderToggle(releases);
+// ── GASからリリースデータ取得 ────────────────────────────────────
+function loadReleaseData() {
+  document.getElementById('latestVer').innerHTML =
+    '<span class="loading-spin"></span> Loading...';
+  fetch(CONFIG.gasUrl)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var releases = data.releases || [];
+      var published = releases.filter(function(r){ return r.published !== false; });
+      if (!published.length) {
+        document.getElementById('latestVer').textContent = 'No releases';
+        return;
+      }
+      // 最新バージョン
+      var latest = published[0];
+      document.getElementById('latestVer').textContent = 'v' + latest.version + '  LATEST';
+      document.getElementById('latestDate').textContent = latest.date || '';
+      var dlBtn = document.getElementById('dlBtn');
+      if (latest.download_url) {
+        dlBtn.href = latest.download_url;
+      } else {
+        dlBtn.textContent = 'Not available';
+        dlBtn.style.opacity = '0.45';
+      }
+      // Changelog
+      if (latest.new_features || latest.bug_fixes || latest.improvements) {
+        var html = '';
+        if (latest.new_features && latest.new_features.length)
+          html += '<strong style="color:#2A9D5C;">✦ New</strong><ul>' +
+            latest.new_features.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
+        if (latest.bug_fixes && latest.bug_fixes.length)
+          html += '<strong style="color:#C0392B;">✦ Fixes</strong><ul>' +
+            latest.bug_fixes.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
+        if (latest.improvements && latest.improvements.length)
+          html += '<strong style="color:#005EAD;">✦ Improvements</strong><ul>' +
+            latest.improvements.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
+        document.getElementById('changelogContent').innerHTML = html;
+        document.getElementById('changelogBlock').style.display = 'block';
+      }
+      // History
+      if (published.length > 1) {
+        var histHtml = '';
+        published.slice(1).forEach(function(r) {
+          histHtml += '<div class="release-item">';
+          histHtml += '<span class="r-ver">v' + escHtml(r.version) + '</span>';
+          histHtml += '<span class="r-date">' + escHtml(r.date || '') + '</span>';
+          if (r.new_features && r.new_features.length) {
+            histHtml += '<ul>' + r.new_features.map(function(i){ return '<li>'+escHtml(i)+'</li>'; }).join('') + '</ul>';
+          }
+          histHtml += '</div>';
+        });
+        document.getElementById('historyList').innerHTML = histHtml;
+      }
+    })
+    .catch(function(){
+      document.getElementById('latestVer').textContent = '—';
+      document.getElementById('latestDate').textContent = 'Could not load data';
+    });
 }
 
-function updateHero(rel) {
-  document.getElementById('heroVer').textContent       = 'v' + rel.version;
-  document.getElementById('heroTitle').innerHTML       = 'OurDaisy <span>v' + esc(rel.version) + '</span>';
-  document.getElementById('vcardVer').innerHTML        =
-    '<span>v' + esc(rel.version) + '</span>' +
-    '<small>' + esc(rel.status) + '</small>' +
-    '<span class="vstatus"><span class="dot dot-green"></span> Latest</span>';
-  document.getElementById('vcardMeta').textContent     =
-    'Released: ' + rel.date + '  ·  ' + (rel.fileSize || '—') + '  ·  Requires: Python 3.10+';
-
-  const chips = document.getElementById('vcardChips');
-  chips.innerHTML = '';
-  (rel.items.new    || []).forEach(t => chips.appendChild(makeChip(t, 'new')));
-  (rel.items.fix    || []).forEach(t => chips.appendChild(makeChip(t, 'fix')));
-  (rel.items.improve|| []).forEach(t => chips.appendChild(makeChip(t, 'imp')));
-
-  const dlBtn = document.getElementById('heroDownload');
-  dlBtn.href = rel.downloadUrl || '#';
-  document.getElementById('heroDlLabel').textContent = 'OurDaisy_v' + rel.version + '_dist.zip';
+// ── 履歴トグル ──────────────────────────────────────────────────
+function toggleHistory() {
+  var list = document.getElementById('historyList');
+  var arrow = document.getElementById('histArrow');
+  var open = list.classList.toggle('open');
+  arrow.textContent = open ? '▼' : '▶';
 }
 
-function buildCard(rel, isLatest) {
-  const wrap = document.createElement('div');
-  wrap.className = 'tl-item';
-
-  const dot  = `<div class="tl-dot${isLatest ? ' latest' : ''}"></div>`;
-  const head = `
-    <div class="tl-head">
-      <div>
-        <div class="tl-ver${isLatest ? ' latest' : ''}">v${esc(rel.version)}</div>
-        <div class="tl-date">${esc(rel.date)}</div>
-      </div>
-      <div style="display:flex;gap:5px;flex-shrink:0">
-        ${isLatest ? '<span class="badge-latest">Latest</span>' : ''}
-        ${rel.status === 'beta'   ? '<span class="badge-status badge-beta">Beta</span>'   : ''}
-        ${rel.status === 'hotfix' ? '<span class="badge-status badge-hotfix">Hotfix</span>' : ''}
-      </div>
-    </div>`;
-
-  const chips = [
-    ...(rel.items.new    ||[]).map(t=>`<span class="chip chip-new">+&nbsp;${esc(truncate(t,40))}</span>`),
-    ...(rel.items.fix    ||[]).map(t=>`<span class="chip chip-fix">✕&nbsp;${esc(truncate(t,40))}</span>`),
-    ...(rel.items.improve||[]).map(t=>`<span class="chip chip-imp">↑&nbsp;${esc(truncate(t,40))}</span>`),
-  ].slice(0,6).join('');
-
-  const allItems = [
-    ...(rel.items.new    ||[]).map(t=>`<li class="li-new">${esc(t)}</li>`),
-    ...(rel.items.fix    ||[]).map(t=>`<li class="li-fix">${esc(t)}</li>`),
-    ...(rel.items.improve||[]).map(t=>`<li class="li-improve">${esc(t)}</li>`),
-  ].join('');
-
-  const foot = rel.downloadUrl
-    ? `<a href="${esc(rel.downloadUrl)}" class="btn-dl-sm" download>↓ Download v${esc(rel.version)}</a>
-       <span class="file-size">OurDaisy_v${esc(rel.version)}_dist.zip${rel.fileSize ? '  ' + rel.fileSize : ''}</span>`
-    : `<span class="file-size" style="color:var(--muted)">No download available</span>`;
-
-  wrap.innerHTML = `
-    ${dot}
-    <div class="tl-card${isLatest ? ' latest' : ''}">
-      ${head}
-      ${chips ? `<div class="tl-chips">${chips}</div>` : ''}
-      ${allItems ? `<ul class="tl-items">${allItems}</ul>` : ''}
-      <div class="tl-foot">${foot}</div>
-    </div>`;
-
-  return wrap;
+// ── 手動スキャン ────────────────────────────────────────────────
+function scanNow() {
+  fetch(CONFIG.gasUrl + '?action=scan')
+    .then(function(){ setTimeout(loadReleaseData, 2000); })
+    .catch(function(){});
+  alert('Scan started. The page will refresh in a moment.');
 }
 
-function makeChip(text, type) {
-  const sp = document.createElement('span');
-  sp.className = 'chip chip-' + type;
-  sp.textContent = (type==='new'?'+ ':type==='fix'?'✕ ':'↑ ') + truncate(text, 35);
-  return sp;
-}
-
-// Older toggle
-function handleOlderToggle(releases) {
-  const wrap = document.getElementById('showOlderWrap');
-  const btn  = document.getElementById('showOlderBtn');
-  const tl   = document.getElementById('timeline');
-
-  if (releases.length <= SITE_CONFIG.INITIAL_SHOW) { wrap.style.display='none'; return; }
-
-  wrap.style.display = 'block';
-  // Hide items beyond INITIAL_SHOW
-  const items = tl.querySelectorAll('.tl-item');
-  items.forEach((el, i) => { if (i >= SITE_CONFIG.INITIAL_SHOW) el.style.display = 'none'; });
-
-  btn.onclick = () => {
-    items.forEach(el => el.style.display = '');
-    wrap.style.display = 'none';
-  };
-}
-
-// Helpers
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function truncate(s, n) {
-  s = String(s);
-  return s.length > n ? s.slice(0,n-1)+'…' : s;
+// ── XSS対策 ────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
