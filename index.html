@@ -328,44 +328,43 @@ function loadAppRelease() {
         return;
       }
       var latest = published[0];
-      var ver = latest.version || latest.ver || '—';
-      document.getElementById('verBadge').textContent = 'v' + ver + '  LATEST';
+      // GASの実際のフィールド名：version / date / downloadUrl / items.new|fix|improve
+      document.getElementById('verBadge').textContent = 'v' + (latest.version||'?') + '  LATEST';
+      document.getElementById('dlDate').textContent   = latest.date || '';
 
-      var dateStr = latest.date || latest.released_at || '';
-      document.getElementById('dlDate').textContent = dateStr;
-
-      // DLボタン：URLがある場合のみ表示
-      var url = latest.download_url || latest.url || latest.zip_url || '';
+      // DLボタン：URLがある場合のみ表示（drive.usercontent形式に変換）
+      var url = latest.downloadUrl || latest.download_url || '';
       if (url) {
+        url = toUcontentUrl(url);
         var btn = document.getElementById('dlBtn');
-        btn.href = url;
-        btn.style.display = 'inline-flex';
+        btn.href = url; btn.style.display = 'inline-flex';
       }
 
-      // Changelog
-      var hasNew  = latest.new_features  && latest.new_features.length;
-      var hasFix  = latest.bug_fixes     && latest.bug_fixes.length;
-      var hasImp  = latest.improvements  && latest.improvements.length;
+      // Changelog（items.new / items.fix / items.improve）
+      var items  = latest.items || {};
+      var hasNew = items.new     && items.new.length;
+      var hasFix = items.fix     && items.fix.length;
+      var hasImp = items.improve && items.improve.length;
       if (hasNew || hasFix || hasImp) {
         var html = '';
-        if (hasNew) html += '<strong>✦ New</strong><ul>'  + latest.new_features.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
-        if (hasFix) html += '<strong>✦ Fixes</strong><ul>'+ latest.bug_fixes.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
-        if (hasImp) html += '<strong>✦ Improvements</strong><ul>'+ latest.improvements.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
+        if (hasNew) html += '<strong>✦ New</strong><ul>'         + items.new.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
+        if (hasFix) html += '<strong>✦ Fixes</strong><ul>'       + items.fix.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
+        if (hasImp) html += '<strong>✦ Improvements</strong><ul>'+ items.improve.map(function(i){return '<li>'+esc(i)+'</li>';}).join('') + '</ul>';
         var cl = document.getElementById('changelog');
         cl.innerHTML = html; cl.style.display = 'block';
       }
 
       // 履歴（2件以上の場合のみ表示）
       if (published.length > 1) {
-        var hw = document.getElementById('historyWrap');
-        hw.style.display = 'block';
+        document.getElementById('historyWrap').style.display = 'block';
         var html2 = '';
         published.slice(1).forEach(function(r) {
+          var it = r.items || {};
           html2 += '<div class="history-item">';
-          html2 += '<span class="hver">v'+esc(r.version||r.ver||'?')+'</span>';
-          html2 += '<span class="hdate">'+esc(r.date||r.released_at||'')+'</span>';
-          if (r.new_features && r.new_features.length)
-            html2 += '<ul>'+r.new_features.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
+          html2 += '<span class="hver">v'+esc(r.version||'?')+'</span>';
+          html2 += '<span class="hdate">'+esc(r.date||'')+'</span>';
+          if (it.new && it.new.length)
+            html2 += '<ul>'+it.new.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>';
           html2 += '</div>';
         });
         document.getElementById('historyList').innerHTML = html2;
@@ -404,6 +403,16 @@ function scanNow() {
   alert('Scan started.');
 }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// drive.google.com/uc → drive.usercontent形式に変換（モバイル対応）
+function toUcontentUrl(url) {
+  if (!url) return url;
+  if (url.indexOf('drive.usercontent.google.com') >= 0) return url;
+  var m = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (!m) { m = url.match(/\/d\/([a-zA-Z0-9_-]+)/); }
+  if (m) return 'https://drive.usercontent.google.com/download?id=' + m[1] + '&export=download&confirm=t';
+  return url;
+}
 </script>
 </body>
 </html>
