@@ -155,6 +155,34 @@ body{
 .admin-inner code{background:#E5EFF8;padding:1px 6px;border-radius:4px;font-size:0.75rem;}
 .admin-inner a{color:#005EAD;}
 
+/* ── Local Staff Form CTA ── */
+.form-cta{
+  margin-top:20px;
+  background:linear-gradient(135deg,#003A70 0%,#005EAD 100%);
+  border-radius:12px;padding:20px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.form-cta-body{flex:1;min-width:200px;}
+.form-cta-en{
+  font-size:0.88rem;font-weight:700;color:#fff;
+  line-height:1.6;margin-bottom:8px;
+}
+.form-cta-loc{
+  font-size:0.78rem;color:rgba(255,255,255,0.80);
+  line-height:1.65;margin-bottom:4px;
+  font-family:'Noto Sans Lao','Noto Sans Khmer',inherit;
+}
+.form-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:10px;
+  background:#fff;color:#003A70;
+  font-family:inherit;font-size:0.92rem;font-weight:700;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;
+  box-shadow:0 3px 12px rgba(0,0,0,0.20);
+  transition:all 0.2s;
+}
+.form-cta-btn:hover{background:#E8F1FB;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.25);}
+
 /* ── Footer ── */
 .site-footer{text-align:center;padding:24px;font-size:0.75rem;color:#9CA3AF;}
 .site-footer a{color:#9CA3AF;text-decoration:none;}
@@ -276,8 +304,19 @@ body{
         </a>
         <div class="bilingual-dl-info">
           <div class="langs">English / ລາວ / ខ្មែរ</div>
-          <div>Local Staff Form: <a href="https://efajapan.github.io/ourdaisy-studio/local-staff-form.html" target="_blank" rel="noopener" style="color:#E67E22;font-weight:700;">Open form →</a></div>
         </div>
+      </div>
+
+      <!-- Local Staff Form CTA -->
+      <div class="form-cta">
+        <div class="form-cta-body">
+          <div class="form-cta-en">🌟 Ready to join? Use the dedicated form to participate in the collaboration — and help grow the multimedia DAISY library for children in your own country!</div>
+          <div class="form-cta-loc">ພ້ອມເຂົ້າຮ່ວມແລ້ວບໍ? ໃຊ້ຟອມສະເພາະນີ້ — ແລະ ຊ່ວຍຂະຫຍາຍຫໍສະໝຸດ DAISY ສຳລັບເດັກນ້ອຍໃນປະເທດຂອງທ່ານ!</div>
+          <div class="form-cta-loc">រួចរាល់ហើយឬ? ប្រើទម្រង់ពិសេស — ហើយជួយពង្រីកបណ្ណាល័យ DAISY សម្រាប់កុមារ!</div>
+        </div>
+        <a href="https://efajapan.github.io/ourdaisy-studio/local-staff-form.html" target="_blank" rel="noopener" class="form-cta-btn">
+          📝 Open Local Staff Form →
+        </a>
       </div>
 
     </div>
