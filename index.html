@@ -374,9 +374,9 @@ function loadAppRelease() {
       // DLボタン：URLがある場合のみ表示（drive.usercontent形式に変換）
       var url = latest.downloadUrl || latest.download_url || '';
       if (url) {
-        url = toUcontentUrl(url);
         var btn = document.getElementById('dlBtn');
-        btn.href = url; btn.style.display = 'inline-flex';
+        applyDlLink(btn, url);
+        btn.style.display = 'inline-flex';
       }
 
       // Changelog（items.new / items.fix / items.improve）
@@ -419,15 +419,15 @@ function loadManuals() {
     .then(function(data){
       if (data.status !== 'ok') return;
       var m = data.manuals;
-      if (m.lao      && m.lao.download_url)      document.getElementById('guideLao').href      = m.lao.download_url;
-      if (m.khm      && m.khm.download_url)      document.getElementById('guideKhm').href      = m.khm.download_url;
-      if (m.bilingual && m.bilingual.download_url) document.getElementById('guideBilingual').href = m.bilingual.download_url;
+      if (m.lao      && m.lao.download_url)      applyDlLink(document.getElementById('guideLao'),      m.lao.download_url);
+      if (m.khm      && m.khm.download_url)      applyDlLink(document.getElementById('guideKhm'),      m.khm.download_url);
+      if (m.bilingual && m.bilingual.download_url) applyDlLink(document.getElementById('guideBilingual'), m.bilingual.download_url);
     })
     .catch(function(){
       // フォールバック
-      document.getElementById('guideLao').href      = 'https://drive.google.com/drive/folders/1MxL0aGqiK8kTop-SyvD3g7-npYLAOeJb';
-      document.getElementById('guideKhm').href      = 'https://drive.google.com/drive/folders/17cHW50mgtCIOj4z5Z9yI_E101YeP-t4O';
-      document.getElementById('guideBilingual').href = 'https://drive.google.com/drive/folders/1838sqnI6IfOOvR8RK31o4DgrlZycol3S';
+      applyDlLink(document.getElementById('guideLao'),      'https://drive.google.com/drive/folders/1MxL0aGqiK8kTop-SyvD3g7-npYLAOeJb');
+      applyDlLink(document.getElementById('guideKhm'),      'https://drive.google.com/drive/folders/17cHW50mgtCIOj4z5Z9yI_E101YeP-t4O');
+      applyDlLink(document.getElementById('guideBilingual'), 'https://drive.google.com/drive/folders/1838sqnI6IfOOvR8RK31o4DgrlZycol3S');
     });
 }
 
@@ -446,11 +446,32 @@ function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
 // drive.google.com/uc → drive.usercontent形式に変換（モバイル対応）
 function toUcontentUrl(url) {
   if (!url) return url;
-  if (url.indexOf('drive.usercontent.google.com') >= 0) return url;
+  if (url.indexOf('drive.usercontent.google.com') >= 0) {
+    return url.indexOf('confirm=') >= 0 ? url : (url + (url.indexOf('?') >= 0 ? '&' : '?') + 'confirm=t');
+  }
   var m = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
   if (!m) { m = url.match(/\/d\/([a-zA-Z0-9_-]+)/); }
   if (m) return 'https://drive.usercontent.google.com/download?id=' + m[1] + '&export=download&confirm=t';
   return url;
+}
+
+// DLリンク適用：ダウンロードURLは「同じタブで素の遷移」（新タブを開かない）。
+// クロスサイトのダウンロードを target="_blank" で新タブに開くと、
+// 一部環境(例:サイボウズのランチャー経由で開いたタブ)でChromeが
+// ERR_BLOCKED_BY_RESPONSE で遮断するため。フォルダURL(閲覧用)は従来どおり新タブ。
+function applyDlLink(btn, url) {
+  if (!btn || !url) return;
+  var isFolder = url.indexOf('/folders/') >= 0;
+  if (isFolder) {
+    btn.href = url;
+    btn.setAttribute('target', '_blank');
+    btn.setAttribute('rel', 'noopener');
+    btn.removeAttribute('download');
+  } else {
+    btn.href = toUcontentUrl(url);
+    btn.removeAttribute('target');
+    btn.setAttribute('download', '');
+  }
 }
 </script>
 </body>
