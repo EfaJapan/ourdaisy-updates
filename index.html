@@ -527,21 +527,21 @@ function applyDlLink(btn, url) {
 }
 
 // ── OCR Tool: 言語パック ────────────────────────────────────────
-var OCR_APP_ZIP_ID = "REPLACE_WITH_APP_ZIP_FILE_ID";
+var OCR_APP_ZIP_ID = "1LGHOuCybfl1M7MEHp8H0bTDv6-xpPdtr";
 var OCR_LANG_PACKS = [
   { code:"lao", label:"Lao (\u0eA5\u0eB2\u0eA7)",                  id:"1DClysWHkyYSIUrfhLR3bsP0KaHGfo-Cr" },
-  { code:"khm", label:"Khmer (\u1781\u17D2\u1798\u17C2\u179A)",  id:"" },
-  { code:"mya", label:"Myanmar",                                       id:"" },
-  { code:"nep", label:"Nepali",                                        id:"" },
-  { code:"tha", label:"Thai",                                          id:"" },
-  { code:"vie", label:"Vietnamese",                                    id:"" },
-  { code:"fil", label:"Tagalog / Filipino",                            id:"" },
-  { code:"por", label:"Portuguese",                                    id:"" },
-  { code:"ind", label:"Indonesian",                                    id:"" },
-  { code:"eng", label:"English",                                       id:"" },
-  { code:"jpn", label:"Japanese",                                      id:"" }
+  { code:"khm", label:"Khmer (\u1781\u17D2\u1798\u17C2\u179A)",  id:"1SD0V2fb59AHfZ_pkuNgGeztn92exHLaa" },
+  { code:"mya", label:"Myanmar",                                       id:"1BuCZHW0R4cHYRHTcbK8ZF9lQ41vtU3GI" },
+  { code:"nep", label:"Nepali",                                        id:"1VruiWOGHgbI18rDBBPjH3jZwUTWhwZ82" },
+  { code:"tha", label:"Thai",                                          id:"1i_cgUaJysMM-aWuTLGj4XRHIRq7CJQlH" },
+  { code:"vie", label:"Vietnamese",                                    id:"1iYW_gAcZET4PhuosF6ViGwkg0qrflF5k" },
+  { code:"fil", label:"Tagalog / Filipino",                            id:"1cNHk2PlSxnDXhcW2ec1HOnfZ6CrS8Whq" },
+  { code:"por", label:"Portuguese",                                    id:"1gceT0hSHKTPwxGT4YjIzJ0tNE9fjX6Xf" },
+  { code:"ind", label:"Indonesian",                                    id:"1XtK8ke82Pt_AX8U0bCUAR1v5aJhEFbcl" },
+  { code:"eng", label:"English",                                       id:"1iyII-WyPQACgXx_IbDtJVoOYQ7kpaHn3" },
+  { code:"jpn", label:"Japanese",                                      id:"1cRkBsQcpjaf1l6c4eFb_7p2vUzAHTDPK" }
 ];
-function ocrDriveUrl(id){ return "https://drive.google.com/uc?export=download&id=" + id; }
+function ocrDriveUrl(id){ return "https://drive.google.com/uc?export=download&confirm=t&id=" + id; }
 (function(){
   var btn = document.getElementById("ocrDlBtn");
   if (btn){
