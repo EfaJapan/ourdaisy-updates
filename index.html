@@ -261,6 +261,58 @@ body{
     </div>
   </div>
 
+  <!-- ══ Section: OCR Tool ══ -->
+  <div class="section-label label-app" style="margin-top:8px;">📷 OurDaisy OCR — Scan to Word</div>
+
+  <div class="card card-app">
+    <div class="card-header">
+      <span class="icon">📷</span>
+      <h2>EFA OurDaisy OCR</h2>
+      <span class="badge-ver">v1.0.1</span>
+    </div>
+    <div class="card-body">
+
+      <div class="changelog" style="display:block;margin-bottom:18px;">
+        Read the text from a scanned picture-book PDF (Lao, Khmer, etc.) and save it as a Word file.
+        Works fully offline — no internet, no credit card, no payment.
+        <strong>Windows only (not for Mac).</strong> The OCR result is a draft;
+        a person who reads the language must check and finalize it.
+        <div class="notice-lang-block" style="background:#F5F8FC;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:0.80rem;color:#374151;line-height:1.8;border-left:3px solid #005EAD;font-family:'Noto Sans Lao',inherit;">
+          ລາວ: ອ່ານຂໍ້ຄວາມຈາກໄຟລ໌ PDF ທີ່ສະແກນ ແລ້ວບັນທຶກເປັນ Word. ໃຊ້ໄດ້ສະເພາະ Windows. ຜົນ OCR ເປັນພຽງຮ່າງ — ຕ້ອງໃຫ້ຜູ້ຮູ້ພາສາກວດສອບ.
+        </div>
+        <div class="notice-lang-block" style="background:#F5F8FC;border-radius:8px;padding:10px 14px;margin-top:8px;font-size:0.80rem;color:#374151;line-height:1.8;border-left:3px solid #005EAD;font-family:'Noto Sans Khmer',inherit;">
+          ខ្មែរ: អានអត្ថបទពី PDF ដែលស្កេន រួចរក្សាទុកជា Word។ ប្រើបានតែលើ Windows។ លទ្ធផល OCR ជាសេចក្តីព្រាង — ត្រូវឱ្យអ្នកចេះភាសាពិនិត្យ។
+        </div>
+      </div>
+
+      <!-- App DL -->
+      <div class="app-dl-wrap">
+        <a id="ocrDlBtn" class="dl-btn dl-primary" href="#" target="_blank" rel="noopener">
+          ↓ Download OCR App (.zip)
+        </a>
+        <span class="app-dl-date">STEP 1 — includes OCR engine</span>
+      </div>
+
+      <!-- Language pack picker -->
+      <div class="guide-row" style="grid-template-columns:1fr;border-top:1px solid #E8F1FB;padding-top:18px;">
+        <div class="guide-block">
+          <div class="guide-lang">📦 STEP 2 — Language pack (choose &amp; download)</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <select id="ocrLangSelect" style="flex:1;min-width:200px;padding:11px 14px;border:2px solid #C5DEFF;border-radius:10px;font-family:inherit;font-size:0.88rem;color:#1A2A3A;background:#fff;cursor:pointer;">
+              <option value="">— Select a language —</option>
+            </select>
+            <button id="ocrLangDl" class="dl-btn dl-outline" disabled style="opacity:.5;cursor:not-allowed;">↓ Download</button>
+          </div>
+          <div id="ocrLangStatus" style="font-size:0.78rem;margin-top:8px;color:#6B7280;"></div>
+          <div style="background:#E8F1FB;border-left:4px solid #005EAD;border-radius:8px;padding:11px 14px;margin-top:12px;font-size:0.80rem;color:#003A70;line-height:1.7;">
+            📁 Put the downloaded file (e.g. <code style="background:#fff;padding:1px 6px;border-radius:4px;">lao.traineddata</code>) into the <code style="background:#fff;padding:1px 6px;border-radius:4px;">tessdata</code> folder next to the app.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ══ Section 2: Bilingual ══ -->
   <div class="section-label label-bilingual" style="margin-top:8px;">
     📚 EFA Bilingual DAISY Project
@@ -473,6 +525,58 @@ function applyDlLink(btn, url) {
     btn.setAttribute('download', '');
   }
 }
+
+// ── OCR Tool: 言語パック ────────────────────────────────────────
+var OCR_APP_ZIP_ID = "REPLACE_WITH_APP_ZIP_FILE_ID";
+var OCR_LANG_PACKS = [
+  { code:"lao", label:"Lao (\u0eA5\u0eB2\u0eA7)",                  id:"1DClysWHkyYSIUrfhLR3bsP0KaHGfo-Cr" },
+  { code:"khm", label:"Khmer (\u1781\u17D2\u1798\u17C2\u179A)",  id:"" },
+  { code:"mya", label:"Myanmar",                                       id:"" },
+  { code:"nep", label:"Nepali",                                        id:"" },
+  { code:"tha", label:"Thai",                                          id:"" },
+  { code:"vie", label:"Vietnamese",                                    id:"" },
+  { code:"fil", label:"Tagalog / Filipino",                            id:"" },
+  { code:"por", label:"Portuguese",                                    id:"" },
+  { code:"ind", label:"Indonesian",                                    id:"" },
+  { code:"eng", label:"English",                                       id:"" },
+  { code:"jpn", label:"Japanese",                                      id:"" }
+];
+function ocrDriveUrl(id){ return "https://drive.google.com/uc?export=download&id=" + id; }
+(function(){
+  var btn = document.getElementById("ocrDlBtn");
+  if (btn){
+    if (OCR_APP_ZIP_ID && OCR_APP_ZIP_ID.indexOf("REPLACE") !== 0){
+      btn.href = ocrDriveUrl(OCR_APP_ZIP_ID);
+    } else {
+      btn.addEventListener("click", function(e){ e.preventDefault(); alert("The OCR app download link is being prepared."); });
+    }
+  }
+  var sel = document.getElementById("ocrLangSelect");
+  if (sel){
+    OCR_LANG_PACKS.forEach(function(p,i){
+      var o = document.createElement("option");
+      o.value = String(i);
+      o.textContent = p.label + (p.id ? "" : " (coming soon)");
+      if (!p.id) o.disabled = true;
+      sel.appendChild(o);
+    });
+    var dl = document.getElementById("ocrLangDl");
+    var st = document.getElementById("ocrLangStatus");
+    sel.addEventListener("change", function(){
+      var v = this.value;
+      if (v===""){ dl.disabled=true; dl.style.opacity=".5"; dl.style.cursor="not-allowed"; st.textContent=""; return; }
+      var p = OCR_LANG_PACKS[parseInt(v,10)];
+      if (p && p.id){ dl.disabled=false; dl.style.opacity="1"; dl.style.cursor="pointer"; st.style.color="#2A9D5C"; st.textContent="\u2713 "+p.label+" ("+p.code+".traineddata) ready to download."; }
+      else { dl.disabled=true; dl.style.opacity=".5"; dl.style.cursor="not-allowed"; st.style.color="#E08A00"; st.textContent="This language pack is being prepared."; }
+    });
+    dl.addEventListener("click", function(){
+      var v = sel.value; if (v==="") return;
+      var p = OCR_LANG_PACKS[parseInt(v,10)];
+      if (p && p.id){ window.location.href = ocrDriveUrl(p.id); }
+    });
+  }
+})();
+
 </script>
 </body>
 </html>
