@@ -507,9 +507,13 @@ function applyGuideMeta(elId, entry) {
 
 function extractVersionFromFilename_(name) {
   if (!name) return '';
-  var m = String(name).match(/_v([0-9]+(?:[._][0-9]+)*)/i);
-  if (!m) return '';
-  return m[1].replace(/_/g, '.');
+  // ファイル名に "_v" パターンが複数含まれる場合（例：OurDaisy_v2_7_16_UserGuide_v3_1_LO.zip）
+  // 末尾側＝ガイド自体のバージョンを優先するため、最後にマッチしたものを採用する
+  var matches = String(name).match(/_v([0-9]+(?:[._][0-9]+)*)/gi);
+  if (!matches || !matches.length) return '';
+  var last = matches[matches.length - 1];
+  var m = last.match(/_v([0-9]+(?:[._][0-9]+)*)/i);
+  return m ? m[1].replace(/_/g, '.') : '';
 }
 
 function formatDateValue_(val) {
