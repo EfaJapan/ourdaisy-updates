@@ -241,12 +241,14 @@ body{
           <a id="guideLao" class="dl-btn dl-outline" href="#" target="_blank" rel="noopener">
             ↓ OurDaisy User Guide (Lao)
           </a>
+          <div class="app-dl-date" id="guideLaoMeta" style="margin-top:6px;"></div>
         </div>
         <div class="guide-block">
           <div class="guide-lang">📖 សៀវភៅណែនាំ — KHMER</div>
           <a id="guideKhm" class="dl-btn dl-outline" href="#" target="_blank" rel="noopener">
             ↓ OurDaisy User Guide (Khmer)
           </a>
+          <div class="app-dl-date" id="guideKhmMeta" style="margin-top:6px;"></div>
         </div>
       </div>
 
@@ -268,7 +270,7 @@ body{
     <div class="card-header">
       <span class="icon">📷</span>
       <h2>EFA OurDaisy OCR</h2>
-      <span class="badge-ver">v1.0.1</span>
+      <span class="badge-ver" id="ocrVerBadge">v1.0.1</span>
     </div>
     <div class="card-body">
 
@@ -277,6 +279,7 @@ body{
         Works fully offline — no internet, no credit card, no payment.
         <strong>Windows only (not for Mac).</strong> The OCR result is a draft;
         a person who reads the language must check and finalize it.
+        <div class="app-dl-date" id="ocrDateText" style="margin-top:8px;"></div>
         <div class="notice-lang-block" style="background:#F5F8FC;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:0.80rem;color:#374151;line-height:1.8;border-left:3px solid #005EAD;font-family:'Noto Sans Lao',inherit;">
           ລາວ: ອ່ານຂໍ້ຄວາມຈາກໄຟລ໌ PDF ທີ່ສະແກນ ແລ້ວບັນທຶກເປັນ Word. ໃຊ້ໄດ້ສະເພາະ Windows. ຜົນ OCR ເປັນພຽງຮ່າງ — ຕ້ອງໃຫ້ຜູ້ຮູ້ພາສາກວດສອບ.
         </div>
@@ -356,6 +359,7 @@ body{
         </a>
         <div class="bilingual-dl-info">
           <div class="langs">English / ລາວ / ខ្មែរ</div>
+          <div id="guideBilingualMeta" style="margin-top:4px;"></div>
         </div>
       </div>
 
@@ -474,6 +478,10 @@ function loadManuals() {
       if (m.lao      && m.lao.download_url)      applyDlLink(document.getElementById('guideLao'),      m.lao.download_url);
       if (m.khm      && m.khm.download_url)      applyDlLink(document.getElementById('guideKhm'),      m.khm.download_url);
       if (m.bilingual && m.bilingual.download_url) applyDlLink(document.getElementById('guideBilingual'), m.bilingual.download_url);
+
+      applyGuideMeta('guideLaoMeta',       m.lao);
+      applyGuideMeta('guideKhmMeta',       m.khm);
+      applyGuideMeta('guideBilingualMeta', m.bilingual);
     })
     .catch(function(){
       // フォールバック
@@ -481,6 +489,34 @@ function loadManuals() {
       applyDlLink(document.getElementById('guideKhm'),      'https://drive.google.com/drive/folders/17cHW50mgtCIOj4z5Z9yI_E101YeP-t4O');
       applyDlLink(document.getElementById('guideBilingual'), 'https://drive.google.com/drive/folders/1838sqnI6IfOOvR8RK31o4DgrlZycol3S');
     });
+}
+
+// マニュアルのバージョン・更新日を表示（GASレスポンスにフィールドが無ければ何も表示しない）
+// version相当のフィールドがGAS側に無い場合は、ファイル名の "_vX_Y" パターンから自動抽出する
+// （命名ルール：EFAManual_LocalStaff_v1_1.zip 等）
+function applyGuideMeta(elId, entry) {
+  var el = document.getElementById(elId);
+  if (!el || !entry) return;
+  var ver  = entry.version || entry.ver || extractVersionFromFilename_(entry.filename);
+  var date = formatDateValue_(entry.date || entry.updated || entry.updated_at);
+  var parts = [];
+  if (ver)  parts.push('v' + esc(ver));
+  if (date) parts.push('Updated ' + esc(date));
+  el.textContent = parts.join('  ・  ');
+}
+
+function extractVersionFromFilename_(name) {
+  if (!name) return '';
+  var m = String(name).match(/_v([0-9]+(?:[._][0-9]+)*)/i);
+  if (!m) return '';
+  return m[1].replace(/_/g, '.');
+}
+
+function formatDateValue_(val) {
+  if (!val) return '';
+  var s = String(val);
+  var m = s.match(/^(\d{4}-\d{2}-\d{2})/);   // ISO日時文字列 → 日付部分のみ
+  return m ? m[1] : s;
 }
 
 function toggleHistory() {
@@ -525,6 +561,17 @@ function applyDlLink(btn, url) {
     btn.setAttribute('download', '');
   }
 }
+
+// ── OCR Tool: バージョン・更新日 ──────────────────────────────
+// GAS連携なしのため手動管理。更新時はここを書き換えるだけでよい。
+var OCR_VERSION = "1.0.1";
+var OCR_UPDATED = "2026-06-12";
+(function(){
+  var badge = document.getElementById("ocrVerBadge");
+  if (badge) badge.textContent = "v" + OCR_VERSION;
+  var dateEl = document.getElementById("ocrDateText");
+  if (dateEl) dateEl.textContent = OCR_UPDATED ? ("Updated " + OCR_UPDATED) : "";
+})();
 
 // ── OCR Tool: 言語パック ────────────────────────────────────────
 var OCR_APP_ZIP_ID = "1LGHOuCybfl1M7MEHp8H0bTDv6-xpPdtr";
